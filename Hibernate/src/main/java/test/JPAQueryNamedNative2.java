@@ -1,52 +1,47 @@
 package test;
 
+
+
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
+
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 
-import entity.Customer;
+import entity.QueryConstants;
 
-public class JPACreateTest {
+public class JPAQueryNamedNative2 {
 
 	public static void main(String[] args) {
 		
 		
 		EntityManagerFactory emf=null;
 		EntityManager em=null;
-		EntityTransaction et=null;
-		
 		
 		try {
 			
 			emf=Persistence.createEntityManagerFactory("OracleUnit");
 			em=emf.createEntityManager();
-			et=em.getTransaction();
-			et.begin();
 			
 			System.out.println("Connection Establised ");
 			
-			Customer entity= new Customer();
+			Query q=em.createNamedQuery(QueryConstants.NATIVE_CUSTOMER_SEARCH);
 			
-			entity.setFirstName("Arnold9");
-			entity.setLastName("Hollywood9");
+			q.setParameter(1,"Swe%");
 			
-			System.out.println("Before Save"+entity);
-			em.persist(entity);
+			List<Object[]> results= (List<Object[]>) q.getResultList();
 			
-			System.out.println("After Save"+entity);
-			
-			
-			
-			et.commit();
-			
-			
-			
-			
+			for (Object[] eachRow:results){
+				
+				System.out.println(eachRow[0] +" "+ eachRow[1]);
+			}
+	
 			
 		} catch(Exception e){
 			e.printStackTrace();
-			et.rollback();
+			
 			
 		}
 		finally{

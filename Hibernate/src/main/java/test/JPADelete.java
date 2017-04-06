@@ -29,7 +29,7 @@ public class JPADelete {
 			
 			
 			
-			Customer entity= em.find(Customer.class, new Long(1000));
+			Customer entity= em.find(Customer.class, new Long(1021));
 			
 			System.out.println("Before delete "+entity);
 			em.remove(entity);

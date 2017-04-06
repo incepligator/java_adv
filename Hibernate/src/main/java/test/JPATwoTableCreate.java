@@ -3,7 +3,7 @@ package test;
 import entity.Customer;
 import entity.Student;
 
-public class JPATwo {
+public class JPATwoTableCreate {
 
 	public static void main(String[] args) {
 		
@@ -18,8 +18,8 @@ public class JPATwo {
 			
 			Customer entity= new Customer();
 			
-			entity.setFirstName("Sweet2");
-			entity.setLastName("Heart2");
+			entity.setFirstName("Kabir");
+			entity.setLastName("Shretha");
 			
 			System.out.println("Before Save Customer"+entity);
 			
@@ -32,10 +32,10 @@ public class JPATwo {
 			
 			Student sentity= new Student();
 			
-			sentity.setFirstName("Sweet2");
-			sentity.setLastName("Heart2");
-			sentity.setAddress("Irving2");
-			sentity.setPhone(44213852);
+			sentity.setFirstName("Kabir");
+			sentity.setLastName("Shrestha");
+			sentity.setAddress("Colorado");
+			sentity.setPhone(984146314);
 			
 			
 			System.out.println("Before Save Student"+sentity);

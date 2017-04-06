@@ -1,52 +1,53 @@
 package test;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
+
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 
 import entity.Customer;
 
-public class JPACreateTest {
+public class JPAQueryTest {
 
 	public static void main(String[] args) {
 		
 		
 		EntityManagerFactory emf=null;
 		EntityManager em=null;
-		EntityTransaction et=null;
+		
 		
 		
 		try {
 			
 			emf=Persistence.createEntityManagerFactory("OracleUnit");
 			em=emf.createEntityManager();
-			et=em.getTransaction();
-			et.begin();
+			
+			
 			
 			System.out.println("Connection Establised ");
 			
-			Customer entity= new Customer();
+						
+			TypedQuery<Customer> query = em.createQuery("select c from Customer c", Customer.class);
 			
-			entity.setFirstName("Arnold9");
-			entity.setLastName("Hollywood9");
+			List<Customer> results=query.getResultList();
 			
-			System.out.println("Before Save"+entity);
-			em.persist(entity);
-			
-			System.out.println("After Save"+entity);
-			
+			for (Customer entity:results){
+				
+				System.out.println(entity);
+			}
 			
 			
-			et.commit();
-			
+	
 			
 			
 			
 			
 		} catch(Exception e){
 			e.printStackTrace();
-			et.rollback();
+			
 			
 		}
 		finally{

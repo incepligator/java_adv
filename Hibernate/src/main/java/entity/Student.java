@@ -7,9 +7,13 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.NamedQuery;
+
+
+
 @Entity
 @Table(name="student")
-
+@NamedQuery( query = "Select e from Student e where e.phone = :ph", name = "find Student by ph" )
 
 public class Student {
 

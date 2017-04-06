@@ -7,16 +7,24 @@ import javax.persistence.Persistence;
 
 public class ConnectionTest {
 
-	EntityManagerFactory emf=null;
-	EntityManager em=null;
-	EntityTransaction et=null;
+	static EntityManagerFactory emf=null;
+	static EntityManager em=null;
+	static EntityTransaction et=null;
 	
-	  void connect() {
+	
+	public static void main(String[] args) {
+		
+		connect();
+		
+		
+	}
+	
+	static   void connect() {
 		
 		
 		
 		
-	//	try {
+		try {
 			
 			emf=Persistence.createEntityManagerFactory("OracleUnit");
 			em=emf.createEntityManager();
@@ -29,10 +37,10 @@ public class ConnectionTest {
 			
 			
 			
-	/*	}catch(Exception e){
+	}catch(Exception e){
 			e.printStackTrace();
-		}*/
-		/*finally{
+		}
+		finally{
 			if(em!=null){
 				
 				em.close();
@@ -41,7 +49,8 @@ public class ConnectionTest {
 				
 				emf.close();
 			}
-		}*/
+			System.out.println("Connection Closed");
+		}
 
 	}
 

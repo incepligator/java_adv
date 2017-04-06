@@ -2,51 +2,39 @@ package test;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
+
 import javax.persistence.Persistence;
 
-import entity.Customer;
+import entity.QueryConstants;
 
-public class JPACreateTest {
+public class JPAQueryNamedCount {
 
 	public static void main(String[] args) {
 		
 		
 		EntityManagerFactory emf=null;
 		EntityManager em=null;
-		EntityTransaction et=null;
+		
 		
 		
 		try {
 			
 			emf=Persistence.createEntityManagerFactory("OracleUnit");
 			em=emf.createEntityManager();
-			et=em.getTransaction();
-			et.begin();
+			
+			
 			
 			System.out.println("Connection Establised ");
 			
-			Customer entity= new Customer();
+		Long count= (Long) em.createNamedQuery(QueryConstants.CUSTOMER_COUNT).getSingleResult();
+		
+		System.out.println("Count"+count);
 			
-			entity.setFirstName("Arnold9");
-			entity.setLastName("Hollywood9");
-			
-			System.out.println("Before Save"+entity);
-			em.persist(entity);
-			
-			System.out.println("After Save"+entity);
-			
-			
-			
-			et.commit();
-			
-			
-			
-			
+		
 			
 		} catch(Exception e){
 			e.printStackTrace();
-			et.rollback();
+			
 			
 		}
 		finally{
