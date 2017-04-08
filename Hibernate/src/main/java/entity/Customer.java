@@ -1,35 +1,39 @@
 package entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="customer")
-//@NamedQuery( query = "Select e from Customer e where e.firstName = :id", name = "find Customer by id" )
+
 @NamedQueries({
 	
-	@NamedQuery(  name =QueryConstants.CUSTOMER_SELECT_ALL,query = "select c from Customer c" ),
+	//@NamedQuery(  name =QueryConstants.CUSTOMER_SELECT_ALL,query = "select c from Customer c" ),
 	@NamedQuery(  name =QueryConstants.CUSTOMER_SEARCH,query = "select c from Customer c where upper(c.firstName) like upper(:p1) and upper(c.lastName) like upper(:p2)"),
 	
-	@NamedQuery(  name =QueryConstants.CUSTOMER_COUNT,query = "select count(*) from Customer")
+	@NamedQuery(  name =QueryConstants.CUSTOMER_COUNT, query = "select count(*) from Customer"),
+	@NamedQuery(  name = "find Customer by id", query = "Select e from Customer e where e.firstName = :id" ),
+	
+	@NamedQuery(  name =QueryConstants.BIJAY, query = "select c from Customer c"),
 })
 
-@NamedNativeQueries({
+	@NamedNativeQueries({
 	@NamedNativeQuery(name=QueryConstants.NATIVE_CUSTOMER_SELECT_ALL, query="select CUSTOMER_PK, FIRST_NAME, LAST_NAME from Customer", resultClass=Customer.class),
 	
 
 	@NamedNativeQuery(name=QueryConstants.NATIVE_CUSTOMER_SEARCH, query="select c.FIRST_NAME, c.LAST_NAME from Customer c where c.FIRST_NAME like ?"),
-	
 
-	
 })
 
 
@@ -42,9 +46,23 @@ public class Customer {
 	
 	private long pk;
 	
+	
+	@OneToOne(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="customer")
+	private CustomerDetails CustomerDetails;
+	
+	
 	@Column(name="FIRST_NAME")
 	private String firstName;
 	
+	
+	public CustomerDetails getCustomerDetails() {
+		return CustomerDetails;
+	}
+
+	public void setCustomerDetails(CustomerDetails customerDetails) {
+		CustomerDetails = customerDetails;
+	}
+
 	@Column(name="LAST_NAME")
 	private String lastName;
 

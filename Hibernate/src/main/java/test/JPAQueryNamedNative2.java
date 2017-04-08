@@ -33,6 +33,7 @@ public class JPAQueryNamedNative2 {
 			
 			List<Object[]> results= (List<Object[]>) q.getResultList();
 			
+			System.out.println("The resulsts are .....................");
 			for (Object[] eachRow:results){
 				
 				System.out.println(eachRow[0] +" "+ eachRow[1]);

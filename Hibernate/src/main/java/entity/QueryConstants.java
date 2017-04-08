@@ -3,6 +3,7 @@ package entity;
 public interface QueryConstants {
 
 	String CUSTOMER_SELECT_ALL="CUSTOMER_SELECT_ALL";
+	
 	String CUSTOMER_SEARCH="CUSTOMER_SEARCH";
 	
 	String CUSTOMER_COUNT="CUSTOMER_COUNT";
@@ -10,4 +11,10 @@ public interface QueryConstants {
 	String NATIVE_CUSTOMER_SELECT_ALL="NATIVE_CUSTOMER_SELECT_ALL";
 	
 	String NATIVE_CUSTOMER_SEARCH="NATIVE_CUSTOMER_SEARCH";
+	
+	String JITU="CUSTOMER_SELECT_ALL";
+
+	String BIJAY="HARI";
+	
+		
 }

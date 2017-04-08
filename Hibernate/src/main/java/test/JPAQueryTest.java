@@ -30,7 +30,7 @@ public class JPAQueryTest {
 			System.out.println("Connection Establised ");
 			
 						
-			TypedQuery<Customer> query = em.createQuery("select c from Customer c", Customer.class);
+			TypedQuery<Customer> query = em.createQuery("select x from Customer x", Customer.class);
 			
 			List<Customer> results=query.getResultList();
 			

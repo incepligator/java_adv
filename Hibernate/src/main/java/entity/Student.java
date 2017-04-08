@@ -33,6 +33,8 @@ public class Student {
 	@Column(name="ADDRESS")
 	private String address;
 	
+
+
 	@Column(name="PHONE")
 	private long phone;
 
