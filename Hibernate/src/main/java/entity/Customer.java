@@ -1,8 +1,12 @@
 package entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,6 +14,7 @@ import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -36,7 +41,7 @@ import javax.persistence.Table;
 
 })
 
-
+@EntityListeners({LoggingListener.class})
 public class Customer {
 
 	@Id
@@ -55,17 +60,30 @@ public class Customer {
 	private String firstName;
 	
 	
-	public CustomerDetails getCustomerDetails() {
-		return CustomerDetails;
+
+
+	public List<CustomerOrderEntity> getCustomerOrders() {
+		
+		if(customerOrders==null){
+			customerOrders= new ArrayList<CustomerOrderEntity>();
+		}
+		return customerOrders;
 	}
 
-	public void setCustomerDetails(CustomerDetails customerDetails) {
-		CustomerDetails = customerDetails;
+	public void setCustomerOrders(List<CustomerOrderEntity> customerOrders) {
+		this.customerOrders = customerOrders;
 	}
 
 	@Column(name="LAST_NAME")
 	private String lastName;
 
+	
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy="customer")
+	private List<CustomerOrderEntity> customerOrders;
+	
+	
+	
 	public long getPk() {
 		return pk;
 	}
@@ -95,7 +113,17 @@ public class Customer {
 		return "Customer [pk=" + pk + ", firstName=" + firstName + ", lastName=" + lastName + "]";
 	}
 
-	
+	public CustomerDetails getCustomerDetails() {
+		
+		
+		
+		
+		return CustomerDetails;
+	}
+
+	public void setCustomerDetails(CustomerDetails customerDetails) {
+		CustomerDetails = customerDetails;
+	}
 	
 
 }

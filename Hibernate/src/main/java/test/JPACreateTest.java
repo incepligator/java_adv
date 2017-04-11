@@ -31,10 +31,10 @@ public class JPACreateTest {
 			entity.setFirstName("Arnold9");
 			entity.setLastName("Hollywood9");
 			
-			System.out.println("Before Save"+entity);
+		//	System.out.println("Before Save"+entity);
 			em.persist(entity);
 			
-			System.out.println("After Save"+entity);
+		//	System.out.println("After Save"+entity);*/
 			
 			
 			
